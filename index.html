@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>alabypedro | Editor de vídeos</title>
+<meta name="description" content="alabypedro, editor de vídeos. Lives, gameplay e cortes verticais para YouTube, TikTok, Reels e Shorts.">
+<meta property="og:title" content="alabypedro | Editor de vídeos">
+<meta property="og:description" content="Transformo lives em vídeos e cortes que prendem do começo ao fim.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=UnifrakturCook:wght@700&family=Grenze+Gotisch:wght@400;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<canvas id="stars" aria-hidden="true"></canvas>
+
+<header class="top">
+  <div class="wrap">
+    <a class="logo" href="#topo"><span class="rec" aria-hidden="true"></span>alaby</a>
+    <nav aria-label="Principal">
+      <a class="lk" href="#projetos">Projetos</a>
+      <a class="lk" href="#servicos">Serviços</a>
+      <a class="lk" href="#como-funciona">Como funciona</a>
+      <a class="lk" href="#clientes">Clientes</a>
+      <a class="btn btn-red btn-sm wa-link" href="#" target="_blank" rel="noopener">WhatsApp</a>
+    </nav>
+  </div>
+  <div class="scrub" aria-hidden="true">
+    <div class="scrub-ticks"></div>
+    <div class="scrub-fill" id="scrub-fill"></div>
+    <div class="scrub-head" id="scrub-head"><span id="scrub-tc">00:00:00:00</span></div>
+  </div>
+</header>
+
+<main id="topo">
+  <section class="hero wrap">
+    <div>
+      <h1><span class="nick">alaby</span>sou <span class="red" style="display:inline"><span id="typed">editor de vídeos.</span><span class="caret" aria-hidden="true"></span></span></h1>
+      <div class="bio">
+        <p>Edito Reels, cortes e vídeos de gameplay pra streamers, creators e marcas.</p>
+        <p>Transformo horas de live em vídeos que prendem do começo ao fim.</p>
+        <p>São Paulo, SP</p>
+      </div>
+      <div class="ctas">
+        <a class="btn btn-red" href="#projetos">Ver projetos</a>
+        <a class="btn btn-line" href="https://x.com/alabypedro" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" aria-hidden="true" fill="currentColor"><path d="M18.9 2H22l-6.8 7.8L23 22h-6.2l-4.9-6.4L6.3 22H3.2l7.3-8.3L1 2h6.3l4.4 5.8L18.9 2zm-1.1 18h1.7L6.3 3.9H4.5L17.8 20z"/></svg>
+          @alabypedro
+        </a>
+      </div>
+    </div>
+    <div class="window" id="featured">
+      <div class="window-bar"><span class="dots" aria-hidden="true"><i></i><i></i><i></i></span><span>~/alabypedro/destaque</span></div>
+      <div id="featured-slot"></div>
+    </div>
+  </section>
+
+  <section class="block wrap" id="projetos">
+    <h2 class="sec-title">Meus projetos</h2>
+    <p class="sec-sub">Uma seleção dos meus melhores trabalhos em edição.</p>
+
+    <h3 class="group-title">Vídeos horizontais</h3>
+    <div class="grid-h" id="list-h"></div>
+
+    <h3 class="group-title">Shorts / Reels</h3>
+    <div class="grid-v" id="list-v"></div>
+  </section>
+
+  <section class="block wrap" id="servicos">
+    <h2 class="sec-title">O que eu faço</h2>
+    <p class="sec-sub">Pra streamers, creators e marcas que querem postar mais sem perder horas editando.</p>
+    <div class="services">
+      <div class="svc">
+        <h3>Vídeos pro YouTube</h3>
+        <p>Pego a live inteira, corto as partes paradas, ajusto o áudio e entrego o vídeo completo ou dividido em episódios.</p>
+      </div>
+      <div class="svc">
+        <h3>Cortes verticais</h3>
+        <p>Os melhores momentos em 9:16 pro TikTok, Reels e Shorts, com câmera ou avatar em cima, jogo embaixo e legenda palavra por palavra.</p>
+      </div>
+      <div class="svc">
+        <h3>Identidade do canal</h3>
+        <p>Títulos, legendas e vinhetas no mesmo estilo em todos os vídeos, pra quem assiste reconhecer o seu canal de cara.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="block wrap" id="como-funciona">
+    <h2 class="sec-title">Como funciona</h2>
+    <p class="sec-sub">Do link da live até o vídeo pronto pra postar.</p>
+    <ol class="steps">
+      <li class="step">
+        <span class="step-n">01</span>
+        <h3>Você manda o link</h3>
+        <p>Me passa o link da live, do VOD ou os arquivos brutos, e diz o que quer: vídeo pro YouTube, cortes ou os dois.</p>
+      </li>
+      <li class="step">
+        <span class="step-n">02</span>
+        <h3>Eu assisto e corto</h3>
+        <p>Separo os melhores momentos, monto o ritmo, coloco legenda, título e o visual do seu canal.</p>
+      </li>
+      <li class="step">
+        <span class="step-n">03</span>
+        <h3>Você revisa</h3>
+        <p>Te mando a prévia antes de qualquer coisa ir pro ar. Você pede o ajuste que quiser.</p>
+      </li>
+      <li class="step">
+        <span class="step-n">04</span>
+        <h3>Entrego pronto</h3>
+        <p>Arquivo final no formato certo de cada rede, pronto pra subir no YouTube, TikTok, Reels e Shorts.</p>
+      </li>
+    </ol>
+  </section>
+
+  <section class="block wrap" id="faq">
+    <h2 class="sec-title">Perguntas frequentes</h2>
+    <div class="faq">
+      <details>
+        <summary>Quanto custa?</summary>
+        <p>Depende da duração da live e de quantos cortes você quer. Me chama no WhatsApp com o link que eu te passo o valor por vídeo ou por pacote mensal.</p>
+      </details>
+      <details>
+        <summary>Quanto tempo demora pra ficar pronto?</summary>
+        <p>O prazo é combinado no orçamento, de acordo com o tamanho do material e a quantidade de vídeos por semana.</p>
+      </details>
+      <details>
+        <summary>Posso pedir alterações?</summary>
+        <p>Sim. Você vê a prévia antes de postar e eu ajusto o que precisar.</p>
+      </details>
+      <details>
+        <summary>Você consegue seguir o estilo que meu canal já usa?</summary>
+        <p>Consigo. Me manda dois ou três vídeos que você gosta e eu sigo a mesma linha de legenda, cortes e ritmo.</p>
+      </details>
+      <details>
+        <summary>Do que você precisa pra começar?</summary>
+        <p>Só o link da live ou do VOD (Twitch, YouTube, Kick) ou os arquivos brutos. Se tiver avatar, logo ou fonte do canal, manda junto.</p>
+      </details>
+      <details>
+        <summary>Edita só jogo?</summary>
+        <p>Meu forte é gameplay e live, mas também edito vídeo falado, podcast e conteúdo de marca pra Reels e TikTok.</p>
+      </details>
+    </div>
+  </section>
+
+  <section class="block wrap" id="depoimentos" hidden>
+    <h2 class="sec-title">O que dizem</h2>
+    <div class="quotes" id="quotes"></div>
+  </section>
+
+  <section class="block wrap" id="clientes">
+    <h2 class="sec-title">Com quem já trabalhei</h2>
+    <div class="clients">
+      <a class="client" href="https://www.youtube.com/@LuckyAoki" target="_blank" rel="noopener">
+        <span class="pic" aria-hidden="true">L</span>
+        <span>@luckyaoki</span>
+      </a>
+    </div>
+  </section>
+
+  <section class="contact" aria-labelledby="contato-t">
+    <div class="wrap">
+      <div>
+        <h2 id="contato-t">Vamos trabalhar juntos?</h2>
+        <p>Estou disponível pra projetos freelance e parcerias. Me chama no WhatsApp ou no Discord.</p>
+        <p class="toast" id="toast" role="status" aria-live="polite"></p>
+      </div>
+      <div class="ctas">
+        <a class="btn btn-red wa-link" href="#" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" aria-hidden="true" fill="currentColor"><path d="M17.5 14.4c-.3-.1-1.7-.8-2-.9-.3-.1-.5-.1-.7.1-.2.3-.8.9-.9 1.1-.2.2-.3.2-.6.1-.3-.1-1.2-.5-2.3-1.4-.9-.8-1.4-1.7-1.6-2-.2-.3 0-.5.1-.6l.4-.5c.1-.2.2-.3.3-.5.1-.2 0-.4 0-.5l-.9-2.2c-.2-.6-.5-.5-.7-.5h-.6c-.2 0-.5.1-.8.4-.3.3-1 1-1 2.4s1 2.8 1.2 3c.1.2 2 3.1 4.9 4.3.7.3 1.2.5 1.6.6.7.2 1.3.2 1.8.1.6-.1 1.7-.7 1.9-1.4.2-.7.2-1.2.2-1.4-.1-.1-.3-.2-.6-.3zM12 21.8c-1.7 0-3.4-.5-4.9-1.4l-.4-.2-3.6.9 1-3.5-.2-.4C3 15.6 2.5 13.8 2.5 12 2.5 6.8 6.8 2.5 12 2.5S21.5 6.8 21.5 12 17.2 21.8 12 21.8zM12 .5C5.7.5.5 5.7.5 12c0 2 .5 4 1.5 5.7L.5 23.5l5.9-1.5c1.7.9 3.6 1.4 5.6 1.4 6.3 0 11.5-5.2 11.5-11.5S18.3.5 12 .5z"/></svg>
+          (11) 97040-7420
+        </a>
+        <button class="btn btn-line discord-copy" type="button" aria-label="Copiar o usuário do Discord alabypedro"><svg viewBox="0 0 24 24" aria-hidden="true" fill="currentColor"><path d="M20.3 4.4A19.8 19.8 0 0015.4 3l-.6 1.3a18.4 18.4 0 00-5.6 0L8.6 3a19.7 19.7 0 00-4.9 1.5C.6 9.1-.3 13.6.1 18.1A19.9 19.9 0 006.2 21l1.3-2.1c-.7-.3-1.4-.6-2-1l.5-.4a14.2 14.2 0 0012 0l.5.4c-.6.4-1.3.7-2 1l1.3 2.1a19.8 19.8 0 006.1-2.9c.5-5.2-.8-9.7-3.6-13.7zM8.5 15.3c-1.2 0-2.2-1.1-2.2-2.4s1-2.4 2.2-2.4 2.2 1.1 2.2 2.4-1 2.4-2.2 2.4zm7 0c-1.2 0-2.2-1.1-2.2-2.4s1-2.4 2.2-2.4 2.2 1.1 2.2 2.4-1 2.4-2.2 2.4z"/></svg><span>Discord @alabypedro</span></button>
+        <a class="btn btn-line" href="mailto:alabypedro@gmail.com">alabypedro@gmail.com</a>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <div>
+      <a class="logo" href="#topo"><span class="rec" aria-hidden="true"></span>alaby</a>
+      <small>Editor de vídeos em São Paulo, © 2026</small>
+    </div>
+    <div class="socials">
+      <a href="https://instagram.com/alabypedro" target="_blank" rel="noopener" aria-label="Instagram"><svg viewBox="0 0 24 24"><path d="M12 2.2c3.2 0 3.6 0 4.8.1 1.2.1 1.8.2 2.2.4.6.2 1 .5 1.4.9.4.4.7.8.9 1.4.2.4.4 1 .4 2.2.1 1.3.1 1.6.1 4.8s0 3.6-.1 4.8c-.1 1.2-.2 1.8-.4 2.2-.2.6-.5 1-.9 1.4-.4.4-.8.7-1.4.9-.4.2-1 .4-2.2.4-1.3.1-1.6.1-4.8.1s-3.6 0-4.8-.1c-1.2-.1-1.8-.2-2.2-.4-.6-.2-1-.5-1.4-.9-.4-.4-.7-.8-.9-1.4-.2-.4-.4-1-.4-2.2C2.2 15.6 2.2 15.2 2.2 12s0-3.6.1-4.8c.1-1.2.2-1.8.4-2.2.2-.6.5-1 .9-1.4.4-.4.8-.7 1.4-.9.4-.2 1-.4 2.2-.4C8.4 2.2 8.8 2.2 12 2.2zm0 1.8c-3.1 0-3.5 0-4.7.1-1.1.1-1.7.2-2.1.4-.5.2-.9.4-1.3.8-.4.4-.6.8-.8 1.3-.2.4-.3 1-.4 2.1C2.6 9.9 2.6 10.3 2.6 12s0 2.1.1 3.3c.1 1.1.2 1.7.4 2.1.2.5.4.9.8 1.3.4.4.8.6 1.3.8.4.2 1 .3 2.1.4 1.2.1 1.6.1 4.7.1s3.5 0 4.7-.1c1.1-.1 1.7-.2 2.1-.4.5-.2.9-.4 1.3-.8.4-.4.6-.8.8-1.3.2-.4.3-1 .4-2.1.1-1.2.1-1.6.1-3.3s0-2.1-.1-3.3c-.1-1.1-.2-1.7-.4-2.1-.2-.5-.4-.9-.8-1.3-.4-.4-.8-.6-1.3-.8-.4-.2-1-.3-2.1-.4C15.5 4 15.1 4 12 4zm0 3.1a4.9 4.9 0 110 9.8 4.9 4.9 0 010-9.8zm0 8a3.1 3.1 0 100-6.2 3.1 3.1 0 000 6.2zm5.1-8.3a1.1 1.1 0 110-2.3 1.1 1.1 0 010 2.3z"/></svg></a>
+      <button class="discord-copy" type="button" aria-label="Copiar o usuário do Discord alabypedro"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20.3 4.4A19.8 19.8 0 0015.4 3l-.6 1.3a18.4 18.4 0 00-5.6 0L8.6 3a19.7 19.7 0 00-4.9 1.5C.6 9.1-.3 13.6.1 18.1A19.9 19.9 0 006.2 21l1.3-2.1c-.7-.3-1.4-.6-2-1l.5-.4a14.2 14.2 0 0012 0l.5.4c-.6.4-1.3.7-2 1l1.3 2.1a19.8 19.8 0 006.1-2.9c.5-5.2-.8-9.7-3.6-13.7zM8.5 15.3c-1.2 0-2.2-1.1-2.2-2.4s1-2.4 2.2-2.4 2.2 1.1 2.2 2.4-1 2.4-2.2 2.4zm7 0c-1.2 0-2.2-1.1-2.2-2.4s1-2.4 2.2-2.4 2.2 1.1 2.2 2.4-1 2.4-2.2 2.4z"/></svg></button>
+      <a href="https://x.com/alabypedro" target="_blank" rel="noopener" aria-label="X"><svg viewBox="0 0 24 24"><path d="M18.9 2H22l-6.8 7.8L23 22h-6.2l-4.9-6.4L6.3 22H3.2l7.3-8.3L1 2h6.3l4.4 5.8L18.9 2zm-1.1 18h1.7L6.3 3.9H4.5L17.8 20z"/></svg></a>
+      <a href="https://www.youtube.com/@LuckyAoki" target="_blank" rel="noopener" aria-label="YouTube"><svg viewBox="0 0 24 24"><path d="M23.5 6.2a3 3 0 00-2.1-2.1C19.5 3.6 12 3.6 12 3.6s-7.5 0-9.4.5A3 3 0 00.5 6.2 31 31 0 000 12a31 31 0 00.5 5.8 3 3 0 002.1 2.1c1.9.5 9.4.5 9.4.5s7.5 0 9.4-.5a3 3 0 002.1-2.1A31 31 0 0024 12a31 31 0 00-.5-5.8zM9.6 15.6V8.4l6.3 3.6-6.3 3.6z"/></svg></a>
+    </div>
+  </div>
+</footer>
+
+<a class="fab wa-link" href="#" target="_blank" rel="noopener" aria-label="Chamar no WhatsApp">
+  <svg viewBox="0 0 24 24"><path d="M17.5 14.4c-.3-.1-1.7-.8-2-.9-.3-.1-.5-.1-.7.1-.2.3-.8.9-.9 1.1-.2.2-.3.2-.6.1-.3-.1-1.2-.5-2.3-1.4-.9-.8-1.4-1.7-1.6-2-.2-.3 0-.5.1-.6l.4-.5c.1-.2.2-.3.3-.5.1-.2 0-.4 0-.5l-.9-2.2c-.2-.6-.5-.5-.7-.5h-.6c-.2 0-.5.1-.8.4-.3.3-1 1-1 2.4s1 2.8 1.2 3c.1.2 2 3.1 4.9 4.3.7.3 1.2.5 1.6.6.7.2 1.3.2 1.8.1.6-.1 1.7-.7 1.9-1.4.2-.7.2-1.2.2-1.4-.1-.1-.3-.2-.6-.3zM12 21.8c-1.7 0-3.4-.5-4.9-1.4l-.4-.2-3.6.9 1-3.5-.2-.4C3 15.6 2.5 13.8 2.5 12 2.5 6.8 6.8 2.5 12 2.5S21.5 6.8 21.5 12 17.2 21.8 12 21.8zM12 .5C5.7.5.5 5.7.5 12c0 2 .5 4 1.5 5.7L.5 23.5l5.9-1.5c1.7.9 3.6 1.4 5.6 1.4 6.3 0 11.5-5.2 11.5-11.5S18.3.5 12 .5z"/></svg>
+</a>
+
+<script src="config.js"></script>
+<script>
+// link de acesso do admin (convite ou login por e-mail) cai aqui: manda pro painel
+if(/access_token=|error_description=/.test(location.hash)){location.replace('admin.html'+location.hash);}
+(function(){
+  var WA='https://wa.me/5511970407420?text='+encodeURIComponent('Oi, vi seu portfólio e quero um orçamento');
+  document.querySelectorAll('.wa-link').forEach(function(a){a.href=WA});
+  var reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  /* ---------- estrelas (fundo) ---------- */
+  var c=document.getElementById('stars'),x=c.getContext('2d'),S=[];
+  function size(){c.width=innerWidth*devicePixelRatio;c.height=innerHeight*devicePixelRatio;S=[];var n=Math.round(innerWidth*innerHeight/9000);for(var i=0;i<n;i++)S.push({x:Math.random()*c.width,y:Math.random()*c.height,s:(Math.random()<.12?2:1)*devicePixelRatio,r:Math.random()<.35,v:.05+Math.random()*.15,p:Math.random()*6});}
+  function draw(t){x.clearRect(0,0,c.width,c.height);S.forEach(function(s){var a=.35+.35*Math.sin(t/900+s.p);x.fillStyle=s.r?'rgba(255,60,20,'+a+')':'rgba(255,0,0,'+a*.55+')';x.fillRect(s.x,s.y,s.s,s.s);if(!reduce){s.y-=s.v*1.6;s.x+=Math.sin(t/1400+s.p)*.15;if(s.y<0)s.y=c.height;}});if(!reduce)requestAnimationFrame(draw);}
+  size();addEventListener('resize',size);requestAnimationFrame(draw);
+
+  /* ---------- digitação do título (uma vez) ---------- */
+  var el=document.getElementById('typed'),full=el.textContent;
+  if(!reduce){el.textContent='';var i=0;(function tick(){el.textContent=full.slice(0,++i);if(i<full.length)setTimeout(tick,70);})();}
+
+  /* ---------- vídeos ---------- */
+  function esc(s){return String(s||'').replace(/[&<>"']/g,function(m){return{'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]})}
+  function player(v,vertical){
+    return '<button class="player'+(vertical?' v':'')+'" data-id="'+esc(v.youtube_id)+'" aria-label="Assistir: '+esc(v.title)+'">'+
+      '<img src="https://i.ytimg.com/vi/'+esc(v.youtube_id)+'/hqdefault.jpg" alt="" loading="lazy">'+
+      '<span class="play"><svg viewBox="0 0 24 24"><path d="M6 4l14 8-14 8z"/></svg></span></button>';
+  }
+  function card(v){
+    var vert=v.format==='vertical';
+    if(vert) return '<article class="card phone-card"><div class="phone">'+player(v,true)+'</div><div class="card-info"><h3>'+esc(v.title)+'</h3>'+(v.subtitle?'<small>'+esc(v.subtitle)+'</small>':'')+'</div></article>';
+    return '<article class="card">'+player(v,vert)+'<div class="card-info"><h3>'+esc(v.title)+'</h3>'+(v.subtitle?'<small>'+esc(v.subtitle)+'</small>':'')+'</div></article>';
+  }
+  function render(list){
+    list=list.slice().sort(function(a,b){return (a.position||0)-(b.position||0)});
+    var h=list.filter(function(v){return v.format!=='vertical'}), vv=list.filter(function(v){return v.format==='vertical'});
+    document.getElementById('list-h').innerHTML=h.length?h.map(card).join(''):'<p class="empty">Nenhum vídeo horizontal ainda.</p>';
+    document.getElementById('list-v').innerHTML=vv.length?vv.map(card).join(''):'<p class="empty">Nenhum corte vertical ainda.</p>';
+    var f=list.find(function(v){return v.featured})||h[0]||list[0];
+    var slot=document.getElementById('featured-slot');
+    if(f){slot.innerHTML=player(f,false);}else{document.getElementById('featured').hidden=true;}
+  }
+  document.addEventListener('click',function(e){
+    var b=e.target.closest('.player');if(!b||b.querySelector('iframe'))return;
+    var f=document.createElement('iframe');
+    f.src='https://www.youtube-nocookie.com/embed/'+b.dataset.id+'?autoplay=1&rel=0&playsinline=1';
+    f.title=b.getAttribute('aria-label');f.allow='autoplay; encrypted-media; picture-in-picture; fullscreen';f.allowFullscreen=true;
+    b.innerHTML='';b.appendChild(f);b.style.cursor='default';
+  });
+
+
+
+  /* ---------- timeline do topo: playhead acompanha a rolagem ---------- */
+  var fill=document.getElementById('scrub-fill'),head=document.getElementById('scrub-head'),tc=document.getElementById('scrub-tc'),ticking=false;
+  function pad2(n){return (n<10?'0':'')+n}
+  function scrub(){
+    ticking=false;
+    var max=document.documentElement.scrollHeight-innerHeight, p=max>0?Math.min(1,Math.max(0,scrollY/max)):0;
+    fill.style.width=(p*100)+'%'; head.style.left=(p*100)+'%';
+    var f=Math.round(p*3*60*30), sec=Math.floor(f/30); // página = 3 min de "vídeo" a 30fps
+    tc.textContent='00:'+pad2(Math.floor(sec/60))+':'+pad2(sec%60)+':'+pad2(f%30);
+    head.classList.toggle('end',p>.85);
+  }
+  addEventListener('scroll',function(){if(!ticking){ticking=true;requestAnimationFrame(scrub)}},{passive:true});
+  addEventListener('resize',scrub); scrub();
+
+  /* ---------- discord ---------- */
+  var toast=document.getElementById('toast'),tt;
+  document.querySelectorAll('.discord-copy').forEach(function(b){b.addEventListener('click',function(){
+    function done(ok){toast.textContent=ok?'Usuário do Discord copiado: alabypedro':'Meu Discord: alabypedro';clearTimeout(tt);tt=setTimeout(function(){toast.textContent=''},4000);if(b.closest('footer'))document.getElementById('contato-t').scrollIntoView({behavior:reduce?'auto':'smooth',block:'center'});}
+    try{navigator.clipboard.writeText('alabypedro').then(function(){done(true)},function(){done(false)})}catch(e){done(false)}
+  })});
+
+  /* ---------- depoimentos ---------- */
+  function renderQuotes(list){
+    if(!list||!list.length)return;
+    document.getElementById('quotes').innerHTML=list.map(function(q){
+      return '<figure class="quote"><blockquote>'+esc(q.text)+'</blockquote><figcaption><strong>'+esc(q.name)+'</strong>'+(q.role?'<span>'+esc(q.role)+'</span>':'')+'</figcaption></figure>';
+    }).join('');
+    document.getElementById('depoimentos').hidden=false;
+  }
+
+  var cfg=window.PORTFOLIO_CONFIG||{}, fb=window.PORTFOLIO_FALLBACK||[];
+  if(!cfg.SUPABASE_URL||!cfg.SUPABASE_ANON_KEY){render(fb);return;}
+  fetch(cfg.SUPABASE_URL+'/rest/v1/videos?select=*&order=position.asc',{headers:{apikey:cfg.SUPABASE_ANON_KEY,Authorization:'Bearer '+cfg.SUPABASE_ANON_KEY}})
+    .then(function(r){if(!r.ok)throw new Error(r.status);return r.json()})
+    .then(function(rows){render(rows)})
+    .catch(function(){render(fb)});
+  fetch(cfg.SUPABASE_URL+'/rest/v1/testimonials?select=*&order=position.asc',{headers:{apikey:cfg.SUPABASE_ANON_KEY,Authorization:'Bearer '+cfg.SUPABASE_ANON_KEY}})
+    .then(function(r){return r.ok?r.json():[]}).then(renderQuotes).catch(function(){});
+})();
+</script>
+</body>
+</html>

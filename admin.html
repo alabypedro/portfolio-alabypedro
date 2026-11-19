@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<title>Admin | alabypedro</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=UnifrakturCook:wght@700&family=Grenze+Gotisch:wght@400;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+<style>
+  body{font-family:system-ui,-apple-system,"Segoe UI",sans-serif;font-size:15px}
+  .admin{width:min(980px,100% - 2rem);margin:0 auto;padding:2rem 0 5rem}
+  .admin h1{font-family:var(--pixel);font-weight:400;font-size:1.3rem;display:flex;align-items:center;gap:.6rem}
+  .bar-row{display:flex;justify-content:space-between;align-items:center;gap:1rem;flex-wrap:wrap;margin-bottom:2rem}
+  .bar-row .who{color:var(--muted);font-size:.9rem}
+  .panel{border:1px solid var(--red-dim);background:var(--panel);padding:1.4rem}
+  .panel + .panel{margin-top:1.5rem}
+  .panel h2{font-family:var(--pixel);font-weight:400;font-size:.9rem;color:var(--red);margin-bottom:1rem}
+  label{display:block;font-size:.85rem;color:var(--muted);margin-bottom:.35rem}
+  input[type=text],input[type=email],input[type=password],input[type=url],select{
+    width:100%;background:var(--bg);border:1px solid rgba(255,255,255,.14);color:var(--text);padding:.7rem .8rem;font:inherit;border-radius:0}
+  input:focus,select:focus{border-color:var(--red);outline:none;box-shadow:0 0 0 3px var(--red-glow)}
+  .row{display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-bottom:1rem}
+  .row.one{grid-template-columns:1fr}
+  .row.three{grid-template-columns:2fr 1fr 1fr}
+  .check{display:flex;align-items:center;gap:.5rem;color:var(--text);font-size:.92rem;margin:0;padding-top:1.9rem}
+  .check input{accent-color:var(--red);width:18px;height:18px}
+  .actions{display:flex;gap:.6rem;align-items:center;flex-wrap:wrap}
+  .btn{font-size:.7rem}
+  .btn[disabled]{opacity:.5;cursor:wait}
+  .msg{font-size:.9rem;margin-top:.8rem;min-height:1.2em}
+  .msg.err{color:#FF7A85}
+  .msg.ok{color:#5BE39A}
+  .preview{display:flex;gap:1rem;align-items:center;margin-bottom:1rem;color:var(--muted);font-size:.88rem}
+  .preview img{width:120px;aspect-ratio:16/9;object-fit:cover;border:1px solid var(--red-dim)}
+
+  .list{display:flex;flex-direction:column;gap:.6rem}
+  .item{display:grid;grid-template-columns:110px 1fr auto;gap:1rem;align-items:center;border:1px solid var(--line);padding:.6rem;background:var(--panel-2)}
+  .item img{width:110px;aspect-ratio:16/9;object-fit:cover}
+  .item h3{font-weight:600;font-size:.95rem;line-height:1.3}
+  .item small{color:var(--muted);display:block;margin-top:.15rem}
+  .tag{display:inline-block;font-size:.72rem;padding:.1rem .45rem;border:1px solid var(--red-dim);color:var(--red);margin-top:.35rem;margin-right:.3rem}
+  .icon-btns{display:flex;gap:.35rem}
+  .ib{width:36px;height:36px;display:grid;place-items:center;border:1px solid rgba(255,255,255,.14);background:transparent;cursor:pointer}
+  .ib:hover{border-color:var(--red);background:var(--red-glow)}
+  .ib svg{width:16px;height:16px;fill:var(--text)}
+  .ib[disabled]{opacity:.3;cursor:default;background:transparent;border-color:rgba(255,255,255,.14)}
+  .ib.del:hover{background:rgba(255,45,61,.35)}
+  .edit-form{grid-column:1/-1;border-top:1px solid var(--line);padding-top:.9rem;margin-top:.3rem}
+  .confirm{grid-column:1/-1;display:flex;align-items:center;gap:.8rem;flex-wrap:wrap;color:#FF7A85;font-size:.9rem;border-top:1px solid var(--line);padding-top:.7rem}
+  .group-h{font-size:.8rem;color:var(--muted);margin:1.4rem 0 .6rem}
+  .group-h:first-child{margin-top:0}
+  .setup{line-height:1.7;color:var(--muted)}
+  .setup code{color:var(--text);background:var(--bg);padding:.1rem .35rem}
+  @media (max-width:640px){
+    .row,.row.three{grid-template-columns:1fr}
+    .check{padding-top:0}
+    .item{grid-template-columns:80px 1fr}
+    .item img{width:80px}
+    .icon-btns{grid-column:1/-1;justify-content:flex-end}
+  }
+</style>
+</head>
+<body>
+<div class="admin">
+  <div class="bar-row">
+    <h1><span class="rec" aria-hidden="true"></span>painel do portfólio</h1>
+    <div class="actions">
+      <span class="who" id="who"></span>
+      <a class="btn btn-line btn-sm" href="./" target="_blank" rel="noopener">Ver site</a>
+      <button class="btn btn-line btn-sm" id="logout" hidden>Sair</button>
+    </div>
+  </div>
+
+  <!-- banco não configurado -->
+  <div class="panel" id="v-setup" hidden>
+    <h2>FALTA CONFIGURAR O BANCO</h2>
+    <p class="setup">Abra o arquivo <code>config.js</code> e preencha <code>SUPABASE_URL</code> e <code>SUPABASE_ANON_KEY</code> com os dados do seu projeto no Supabase (Project Settings › API). Depois publique o site de novo.</p>
+  </div>
+
+  <!-- login -->
+  <form class="panel" id="v-login" hidden>
+    <h2>ENTRAR</h2>
+    <p class="setup" style="margin-bottom:1rem">Sem senha: você recebe um link de acesso no e-mail. Abra o link <strong>neste mesmo navegador</strong> (se abrir no celular, quem fica logado é o celular).</p>
+    <div class="row one">
+      <div><label for="email">E-mail do admin</label><input type="email" id="email" autocomplete="username" required></div>
+    </div>
+    <div class="actions"><button class="btn btn-red" type="submit" id="login-btn">ENVIAR LINK DE ACESSO</button></div>
+    <p class="msg" id="login-msg" role="status"></p>
+  </form>
+
+  <!-- painel -->
+  <div id="v-app" hidden>
+    <form class="panel" id="add-form">
+      <h2>ADICIONAR VÍDEO</h2>
+      <div class="row one">
+        <div><label for="a-url">Link do YouTube (vídeo ou Short)</label><input type="url" id="a-url" placeholder="https://www.youtube.com/watch?v=... ou https://youtube.com/shorts/..." required></div>
+      </div>
+      <div class="preview" id="a-preview" hidden><img alt=""><span></span></div>
+      <div class="row three">
+        <div><label for="a-title">Título</label><input type="text" id="a-title" required maxlength="140"></div>
+        <div><label for="a-format">Formato</label>
+          <select id="a-format"><option value="horizontal">Horizontal (16:9)</option><option value="vertical">Vertical (Shorts/Reels)</option></select></div>
+        <label class="check"><input type="checkbox" id="a-featured"> Destaque do topo</label>
+      </div>
+      <div class="row one">
+        <div><label for="a-sub">Descrição curta (opcional)</label><input type="text" id="a-sub" maxlength="120" placeholder="Ex.: Corte vertical com avatar"></div>
+      </div>
+      <div class="actions"><button class="btn btn-red" type="submit" id="add-btn">ADICIONAR</button></div>
+      <p class="msg" id="add-msg" role="status"></p>
+    </form>
+
+    <div class="panel">
+      <h2>VÍDEOS NO SITE</h2>
+      <div id="lists"></div>
+      <p class="msg" id="list-msg" role="status"></p>
+    </div>
+
+    <form class="panel" id="q-form">
+      <h2>DEPOIMENTOS</h2>
+      <p class="setup" style="margin-bottom:1rem">A seção de depoimentos só aparece no site quando tiver pelo menos um.</p>
+      <div class="row">
+        <div><label for="q-name">Nome do cliente</label><input type="text" id="q-name" required maxlength="60"></div>
+        <div><label for="q-role">@ ou canal (opcional)</label><input type="text" id="q-role" maxlength="60" placeholder="Ex.: @luckyaoki, streamer"></div>
+      </div>
+      <div class="row one"><div><label for="q-text">O que a pessoa falou</label><input type="text" id="q-text" required maxlength="300"></div></div>
+      <div class="actions"><button class="btn btn-red" type="submit" id="q-btn">ADICIONAR DEPOIMENTO</button></div>
+      <p class="msg" id="q-msg" role="status"></p>
+      <div class="list" id="q-list" style="margin-top:1rem"></div>
+    </form>
+  </div>
+</div>
+
+<script src="config.js"></script>
+<script type="module">
+const cfg = window.PORTFOLIO_CONFIG || {};
+const $ = (id) => document.getElementById(id);
+const show = (id) => ['v-setup','v-login','v-app'].forEach(v => $(v).hidden = v !== id);
+const esc = (s) => String(s ?? '').replace(/[&<>"']/g, m => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]));
+const msg = (el, text, kind) => { el.textContent = text || ''; el.className = 'msg' + (kind ? ' ' + kind : ''); };
+
+if (!cfg.SUPABASE_URL || !cfg.SUPABASE_ANON_KEY) { show('v-setup'); throw new Error('config'); }
+
+const { createClient } = await import('https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/+esm');
+const sb = createClient(cfg.SUPABASE_URL, cfg.SUPABASE_ANON_KEY);
+$('email').value = cfg.ADMIN_EMAIL || '';
+
+let videos = [];
+
+/* ---------- YouTube ---------- */
+function parseYouTube(url) {
+  try {
+    const u = new URL(url.trim());
+    const host = u.hostname.replace(/^www\.|^m\./, '');
+    let id = null, vertical = false;
+    if (host === 'youtu.be') id = u.pathname.slice(1, 12);
+    else if (host.endsWith('youtube.com') || host === 'youtube-nocookie.com') {
+      if (u.searchParams.get('v')) id = u.searchParams.get('v');
+      const m = u.pathname.match(/^\/(shorts|embed|live)\/([\w-]{11})/);
+      if (m) { id = m[2]; vertical = m[1] === 'shorts'; }
+    }
+    return id && /^[\w-]{11}$/.test(id) ? { id, vertical } : null;
+  } catch { return null; }
+}
+async function fetchTitle(id) {
+  const target = encodeURIComponent('https://www.youtube.com/watch?v=' + id);
+  for (const api of ['https://www.youtube.com/oembed?format=json&url=', 'https://noembed.com/embed?url=']) {
+    try { const r = await fetch(api + target); if (r.ok) { const j = await r.json(); if (j.title) return j.title; } } catch {}
+  }
+  return '';
+}
+
+/* ---------- auth ---------- */
+async function boot() {
+  const { data } = await sb.auth.getSession();
+  if (data.session) { enterApp(data.session); } else { show('v-login'); $('logout').hidden = true; $('who').textContent = ''; }
+}
+function enterApp(session) {
+  show('v-app'); $('logout').hidden = false; $('who').textContent = session.user.email;
+  load(); loadQuotes();
+}
+$('v-login').addEventListener('submit', async (e) => {
+  e.preventDefault();
+  const btn = $('login-btn'); btn.disabled = true; msg($('login-msg'), 'Enviando...');
+  const { error } = await sb.auth.signInWithOtp({
+    email: $('email').value.trim(),
+    options: { shouldCreateUser: false, emailRedirectTo: location.origin + location.pathname }
+  });
+  btn.disabled = false;
+  if (error) {
+    const wait = /rate|seconds|security purposes/i.test(error.message);
+    msg($('login-msg'), wait ? 'Muitos pedidos seguidos. Espere um minuto e tente de novo.' : 'Esse e-mail não tem acesso ao painel.', 'err');
+    return;
+  }
+  msg($('login-msg'), 'Link enviado. Abra o e-mail neste navegador (gmail.com aqui mesmo) e clique no link.', 'ok');
+});
+sb.auth.onAuthStateChange((evt, session) => { if (evt === 'SIGNED_IN' && session && $('v-app').hidden) enterApp(session); });
+$('logout').addEventListener('click', async () => { await sb.auth.signOut(); boot(); });
+
+/* ---------- dados ---------- */
+async function load() {
+  const { data, error } = await sb.from('videos').select('*').order('position', { ascending: true });
+  if (error) { msg($('list-msg'), 'Não consegui carregar os vídeos: ' + error.message, 'err'); return; }
+  videos = data; render();
+}
+function itemHTML(v, i, group) {
+  const first = i === 0, last = i === group.length - 1;
+  return `<div class="item" data-id="${v.id}">
+    <img src="https://i.ytimg.com/vi/${esc(v.youtube_id)}/mqdefault.jpg" alt="">
+    <div><h3>${esc(v.title)}</h3>${v.subtitle ? `<small>${esc(v.subtitle)}</small>` : ''}
+      <span class="tag">${v.format === 'vertical' ? 'Vertical' : 'Horizontal'}</span>${v.featured ? '<span class="tag">Destaque</span>' : ''}</div>
+    <div class="icon-btns">
+      <button class="ib" data-act="up" ${first ? 'disabled' : ''} aria-label="Subir"><svg viewBox="0 0 24 24"><path d="M12 6l-7 7h4v5h6v-5h4z"/></svg></button>
+      <button class="ib" data-act="down" ${last ? 'disabled' : ''} aria-label="Descer"><svg viewBox="0 0 24 24"><path d="M12 18l7-7h-4V6H9v5H5z"/></svg></button>
+      <button class="ib" data-act="edit" aria-label="Editar"><svg viewBox="0 0 24 24"><path d="M3 17.2V21h3.8l11-11-3.8-3.8-11 11zM20.7 7a1 1 0 000-1.4l-2.3-2.3a1 1 0 00-1.4 0l-1.8 1.8 3.8 3.8L20.7 7z"/></svg></button>
+      <button class="ib del" data-act="del" aria-label="Remover"><svg viewBox="0 0 24 24"><path d="M6 19a2 2 0 002 2h8a2 2 0 002-2V7H6v12zM19 4h-3.5l-1-1h-5l-1 1H5v2h14V4z"/></svg></button>
+    </div>
+  </div>`;
+}
+function render() {
+  const h = videos.filter(v => v.format !== 'vertical'), vv = videos.filter(v => v.format === 'vertical');
+  const block = (title, g) => `<p class="group-h">${title} (${g.length})</p>` +
+    (g.length ? `<div class="list">${g.map((v, i) => itemHTML(v, i, g)).join('')}</div>` : '<p class="empty">Nenhum vídeo aqui ainda.</p>');
+  $('lists').innerHTML = block('VÍDEOS HORIZONTAIS', h) + block('SHORTS / REELS', vv);
+}
+async function clearFeatured(exceptId) {
+  const q = sb.from('videos').update({ featured: false }).eq('featured', true);
+  return exceptId ? q.neq('id', exceptId) : q;
+}
+
+/* ---------- adicionar ---------- */
+let titleTimer;
+$('a-url').addEventListener('input', () => {
+  clearTimeout(titleTimer);
+  const p = parseYouTube($('a-url').value);
+  const pv = $('a-preview');
+  if (!p) { pv.hidden = true; return; }
+  pv.hidden = false; pv.querySelector('img').src = `https://i.ytimg.com/vi/${p.id}/mqdefault.jpg`;
+  pv.querySelector('span').textContent = 'Vídeo encontrado: ' + p.id;
+  if (p.vertical) $('a-format').value = 'vertical';
+  titleTimer = setTimeout(async () => { if (!$('a-title').value) { const t = await fetchTitle(p.id); if (t && !$('a-title').value) $('a-title').value = t; } }, 300);
+});
+$('add-form').addEventListener('submit', async (e) => {
+  e.preventDefault();
+  const p = parseYouTube($('a-url').value);
+  if (!p) { msg($('add-msg'), 'Esse link não parece ser de um vídeo do YouTube.', 'err'); return; }
+  if (videos.some(v => v.youtube_id === p.id)) { msg($('add-msg'), 'Esse vídeo já está no site.', 'err'); return; }
+  const btn = $('add-btn'); btn.disabled = true; msg($('add-msg'), 'Salvando...');
+  const featured = $('a-featured').checked;
+  const position = videos.reduce((m, v) => Math.max(m, v.position || 0), 0) + 1;
+  const { data, error } = await sb.from('videos').insert({
+    youtube_id: p.id, title: $('a-title').value.trim(), subtitle: $('a-sub').value.trim() || null,
+    format: $('a-format').value, featured, position
+  }).select().single();
+  if (!error && featured) await clearFeatured(data.id);
+  btn.disabled = false;
+  if (error) { msg($('add-msg'), 'Não consegui salvar: ' + error.message, 'err'); return; }
+  e.target.reset(); $('a-preview').hidden = true; msg($('add-msg'), 'Vídeo adicionado. Já aparece no site.', 'ok');
+  load();
+});
+
+/* ---------- editar / remover / ordenar ---------- */
+$('lists').addEventListener('click', async (e) => {
+  const b = e.target.closest('button'); if (!b) return;
+  const row = b.closest('.item'); const id = row?.dataset.id; const v = videos.find(x => x.id === id);
+  const act = b.dataset.act;
+  if (act === 'up' || act === 'down') {
+    const g = videos.filter(x => (x.format === 'vertical') === (v.format === 'vertical'));
+    const i = g.indexOf(v), j = act === 'up' ? i - 1 : i + 1; const o = g[j]; if (!o) return;
+    b.disabled = true;
+    const pa = v.position, pb = o.position === pa ? pa + (act === 'up' ? -1 : 1) : o.position;
+    const r1 = await sb.from('videos').update({ position: pb }).eq('id', v.id);
+    const r2 = await sb.from('videos').update({ position: pa }).eq('id', o.id);
+    if (r1.error || r2.error) msg($('list-msg'), 'Não consegui mudar a ordem.', 'err');
+    load();
+  }
+  if (act === 'del') {
+    row.querySelector('.confirm')?.remove();
+    row.insertAdjacentHTML('beforeend', `<div class="confirm">Remover "${esc(v.title)}" do site?
+      <button class="btn btn-red btn-sm" data-act="del-yes">Remover</button>
+      <button class="btn btn-line btn-sm" data-act="cancel">Cancelar</button></div>`);
+  }
+  if (act === 'del-yes') {
+    b.disabled = true;
+    const { error } = await sb.from('videos').delete().eq('id', id);
+    if (error) { msg($('list-msg'), 'Não consegui remover: ' + error.message, 'err'); b.disabled = false; return; }
+    msg($('list-msg'), 'Vídeo removido.', 'ok'); load();
+  }
+  if (act === 'cancel') { b.closest('.confirm, .edit-form')?.remove(); }
+  if (act === 'edit') {
+    if (row.querySelector('.edit-form')) return;
+    row.insertAdjacentHTML('beforeend', `<form class="edit-form">
+      <div class="row three">
+        <div><label>Título</label><input type="text" name="title" value="${esc(v.title)}" required maxlength="140"></div>
+        <div><label>Formato</label><select name="format">
+          <option value="horizontal" ${v.format !== 'vertical' ? 'selected' : ''}>Horizontal (16:9)</option>
+          <option value="vertical" ${v.format === 'vertical' ? 'selected' : ''}>Vertical (Shorts/Reels)</option></select></div>
+        <label class="check"><input type="checkbox" name="featured" ${v.featured ? 'checked' : ''}> Destaque do topo</label>
+      </div>
+      <div class="row one"><div><label>Descrição curta</label><input type="text" name="subtitle" value="${esc(v.subtitle)}" maxlength="120"></div></div>
+      <div class="actions"><button class="btn btn-red btn-sm" type="submit">Salvar</button><button class="btn btn-line btn-sm" type="button" data-act="cancel">Cancelar</button></div>
+    </form>`);
+    const f = row.querySelector('.edit-form');
+    f.addEventListener('submit', async (ev) => {
+      ev.preventDefault();
+      const fd = new FormData(f); const featured = fd.get('featured') === 'on';
+      const { error } = await sb.from('videos').update({
+        title: String(fd.get('title')).trim(), subtitle: String(fd.get('subtitle')).trim() || null,
+        format: fd.get('format'), featured
+      }).eq('id', id);
+      if (!error && featured) await clearFeatured(id);
+      if (error) { msg($('list-msg'), 'Não consegui salvar: ' + error.message, 'err'); return; }
+      msg($('list-msg'), 'Alterações salvas.', 'ok'); load();
+    });
+  }
+});
+
+
+/* ---------- depoimentos ---------- */
+let quotes = [];
+async function loadQuotes() {
+  const { data, error } = await sb.from('testimonials').select('*').order('position', { ascending: true });
+  if (error) { msg($('q-msg'), 'Não consegui carregar os depoimentos: ' + error.message, 'err'); return; }
+  quotes = data;
+  $('q-list').innerHTML = quotes.length ? quotes.map(q => `<div class="item" data-qid="${q.id}" style="grid-template-columns:1fr auto">
+      <div><h3>${esc(q.name)}${q.role ? ` <small style="display:inline">${esc(q.role)}</small>` : ''}</h3><small>"${esc(q.text)}"</small></div>
+      <div class="icon-btns"><button type="button" class="ib del" data-qact="del" aria-label="Remover depoimento"><svg viewBox="0 0 24 24"><path d="M6 19a2 2 0 002 2h8a2 2 0 002-2V7H6v12zM19 4h-3.5l-1-1h-5l-1 1H5v2h14V4z"/></svg></button></div>
+    </div>`).join('') : '<p class="empty">Nenhum depoimento ainda.</p>';
+}
+$('q-form').addEventListener('submit', async (e) => {
+  e.preventDefault();
+  const btn = $('q-btn'); btn.disabled = true;
+  const position = quotes.reduce((m, q) => Math.max(m, q.position || 0), 0) + 1;
+  const { error } = await sb.from('testimonials').insert({ name: $('q-name').value.trim(), role: $('q-role').value.trim() || null, text: $('q-text').value.trim(), position });
+  btn.disabled = false;
+  if (error) { msg($('q-msg'), 'Não consegui salvar: ' + error.message, 'err'); return; }
+  ['q-name','q-role','q-text'].forEach(id => $(id).value = ''); msg($('q-msg'), 'Depoimento adicionado.', 'ok'); loadQuotes();
+});
+$('q-list').addEventListener('click', async (e) => {
+  const b = e.target.closest('button[data-qact]'); if (!b) return;
+  const row = b.closest('.item'); const id = row.dataset.qid;
+  if (b.dataset.qact === 'del') {
+    row.querySelector('.confirm')?.remove();
+    row.insertAdjacentHTML('beforeend', `<div class="confirm">Remover este depoimento?
+      <button type="button" class="btn btn-red btn-sm" data-qact="yes">Remover</button>
+      <button type="button" class="btn btn-line btn-sm" data-qact="no">Cancelar</button></div>`);
+  }
+  if (b.dataset.qact === 'no') b.closest('.confirm').remove();
+  if (b.dataset.qact === 'yes') {
+    const { error } = await sb.from('testimonials').delete().eq('id', id);
+    if (error) { msg($('q-msg'), 'Não consegui remover: ' + error.message, 'err'); return; }
+    msg($('q-msg'), 'Depoimento removido.', 'ok'); loadQuotes();
+  }
+});
+
+boot();
+</script>
+</body>
+</html>
