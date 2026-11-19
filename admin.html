@@ -148,6 +148,14 @@ if (!cfg.SUPABASE_URL || !cfg.SUPABASE_ANON_KEY) { show('v-setup'); throw new Er
 const { createClient } = await import('https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/+esm');
 const sb = createClient(cfg.SUPABASE_URL, cfg.SUPABASE_ANON_KEY);
 $('email').value = cfg.ADMIN_EMAIL || '';
+const hashErr = new URLSearchParams(location.hash.slice(1));
+if (hashErr.get('error')) {
+  const code = hashErr.get('error_code') || '';
+  history.replaceState(null, '', location.pathname);
+  setTimeout(() => msg($('login-msg'), code === 'otp_expired'
+    ? 'Esse link venceu ou já foi usado (cada link vale 1 hora e funciona uma vez só). Peça um novo abaixo.'
+    : 'O link de acesso não funcionou: ' + (hashErr.get('error_description') || code) + '. Peça um novo abaixo.', 'err'), 0);
+}
 
 let videos = [];
 
@@ -192,8 +200,13 @@ $('v-login').addEventListener('submit', async (e) => {
   });
   btn.disabled = false;
   if (error) {
-    const wait = /rate|seconds|security purposes/i.test(error.message);
-    msg($('login-msg'), wait ? 'Muitos pedidos seguidos. Espere um minuto e tente de novo.' : 'Esse e-mail não tem acesso ao painel.', 'err');
+    const m = error.message || '';
+    let txt;
+    if (/rate limit|too many/i.test(m)) txt = 'O limite de e-mails por hora foi atingido. Espere uns minutos (até 1 hora) e peça de novo.';
+    else if (/seconds|security purposes/i.test(m)) txt = 'Espere 1 minuto antes de pedir outro link.';
+    else if (/signups not allowed|not found|not allowed for otp/i.test(m)) txt = 'Esse e-mail não tem acesso ao painel.';
+    else txt = 'Não consegui enviar o link: ' + m;
+    msg($('login-msg'), txt, 'err');
     return;
   }
   msg($('login-msg'), 'Link enviado. Abra o e-mail neste navegador (gmail.com aqui mesmo) e clique no link.', 'ok');
