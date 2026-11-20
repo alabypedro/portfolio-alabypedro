@@ -11,9 +11,9 @@ window.PORTFOLIO_CONFIG = {
 window.PORTFOLIO_FALLBACK = [
   { youtube_id: "7hfv7-aiIcQ", title: "Tentando jogar Valorant com os amigos (Parte 2)", subtitle: "Live editada pro YouTube", format: "horizontal", featured: true,  position: 1 },
   { youtube_id: "wJVxqzJ5WPo", title: "TENTANDO JOGAR VALORANT", subtitle: "Live editada pro YouTube", format: "horizontal", featured: false, position: 2 },
-  { youtube_id: "EZk2InMFTOo", title: "Jogando Vavazinho (Parte 4 de 8)", subtitle: "VOD dividido em partes", format: "horizontal", featured: false, position: 3 },
-  { youtube_id: "0kzje3w0i-Y", title: "Jogando Vavazinho (Parte 1 de 8)", subtitle: "VOD dividido em partes", format: "horizontal", featured: false, position: 4 },
-  { youtube_id: "Uj9Tvdovr3c", title: "Sendo carregada pelo time", subtitle: "Corte vertical com avatar", format: "vertical", featured: false, position: 5 },
-  { youtube_id: "6OrBmicwKIs", title: "Que mira foi essa?", subtitle: "Corte vertical com avatar", format: "vertical", featured: false, position: 6 },
-  { youtube_id: "WINFbtwAL9c", title: "Eu me distraí com a conversa", subtitle: "Corte vertical com avatar", format: "vertical", featured: false, position: 7 }
+  { youtube_id: "EZk2InMFTOo", title: "Jogando Vavazinho (Parte 4 de 8)", subtitle: "Live longa dividida em partes", format: "horizontal", featured: false, position: 3 },
+  { youtube_id: "0kzje3w0i-Y", title: "Jogando Vavazinho (Parte 1 de 8)", subtitle: "Live longa dividida em partes", format: "horizontal", featured: false, position: 4 },
+  { youtube_id: "Uj9Tvdovr3c", title: "Sendo carregada pelo time", subtitle: "Melhor momento da live, com o avatar da streamer", format: "vertical", featured: false, position: 5 },
+  { youtube_id: "6OrBmicwKIs", title: "Que mira foi essa?", subtitle: "Melhor momento da live, com o avatar da streamer", format: "vertical", featured: false, position: 6 },
+  { youtube_id: "WINFbtwAL9c", title: "Eu me distraí com a conversa", subtitle: "Melhor momento da live, com o avatar da streamer", format: "vertical", featured: false, position: 7 }
 ];
