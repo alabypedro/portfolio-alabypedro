@@ -38,6 +38,7 @@
   <div class="bg-layer bg-sky"></div>
   <div class="bg-sun"></div>
   <div class="bg-layer bg-waves"></div>
+  <div class="bg-layer bg-figure"></div>
   <div class="bg-shade"></div>
   <div class="bg-dim"></div>
 </div>
@@ -332,10 +333,10 @@ if(/access_token=|error_description=/.test(location.hash)){location.replace('adm
 
 
   /* ---------- timeline do topo: playhead acompanha a rolagem ---------- */
-  var bgSky=document.querySelector('.bg-sky'),bgWaves=document.querySelector('.bg-waves'),bgSun=document.querySelector('.bg-sun'),bgDim=document.querySelector('.bg-dim');
+  var bgSky=document.querySelector('.bg-sky'),bgFig=document.querySelector('.bg-figure'),bgWaves=document.querySelector('.bg-waves'),bgSun=document.querySelector('.bg-sun'),bgDim=document.querySelector('.bg-dim');
   function paintBg(p){
     var h=innerHeight;
-    bgSky.style.transform='translate3d(0,'+(-p*h*.05).toFixed(1)+'px,0)';
+    bgSky.style.transform=bgFig.style.transform='translate3d(0,'+(-p*h*.05).toFixed(1)+'px,0)';
     bgWaves.style.transform='translate3d(0,'+((.04-p*.16)*h).toFixed(1)+'px,0)';
     bgSun.style.transform='translate3d(0,'+(-p*h*.06).toFixed(1)+'px,0)';
     bgSun.style.opacity=(.35+p*.65).toFixed(3);
